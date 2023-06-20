@@ -1,6 +1,6 @@
 package nk.selenium.enums;
 
-import static nk.selenium.constants.ConstantsOfTheFramework.HEADLESS;
+import static nk.selenium.constants.ConstantsInFramework.HEADLESS;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;

@@ -2,15 +2,23 @@ package nk.selenium.base;
 
 import nk.selenium.drivers.DriverManager;
 import nk.selenium.enums.BrowserType;
+import nk.selenium.reports.ExtentReportManager;
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 
 public class BaseTest {
+
+    @BeforeSuite
+    public void setUp(){
+        ExtentReportManager.createReport();
+    }
+
+    @AfterSuite
+    public void finish(){
+        ExtentReportManager.flushReport();
+    }
 
     @BeforeMethod
     @Parameters({"browser"})

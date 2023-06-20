@@ -17,6 +17,7 @@
 
         <selenium.version>4.9.0</selenium.version>
         <testng.version>7.7.1</testng.version>
+        <extentreport.version>5.0.9</extentreport.version>
     </properties>
 
     <dependencies>
@@ -34,6 +35,11 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>${extentreport.version}</version>
         </dependency>
     </dependencies>
 
