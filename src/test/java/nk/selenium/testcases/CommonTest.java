@@ -1,26 +1,31 @@
 package nk.selenium.testcases;
 
-import com.aventstack.extentreports.Status;
 import nk.selenium.base.BaseTest;
 import nk.selenium.drivers.DriverManager;
+import nk.selenium.listeners.TestListener;
 import nk.selenium.reports.ExtentReportManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import nk.selenium.utils.Log;
+import nk.selenium.utils.WebDriverActions;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CommonTest extends BaseTest {
-    public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.google.com/");
-        System.out.println(driver.getTitle());
-        driver.quit();
+
+    private Logger log = LogManager.getLogger(CommonTest.class);
+
+    @Test(description = "Verify google page title",retryAnalyzer = TestListener.class)
+    public void googleTest(){
+        WebDriverActions.loadURL("https://www.google.com/");
+        String title = WebDriverActions.getTitle();
+        Assert.assertEquals(title,"Google");
     }
 
-    @Test
-    public void googleTest(){
-        ExtentReportManager.createTestCase("Google Teste");
-        DriverManager.getDriver().get("https://www.google.com/");
-        ExtentReportManager.logMessage(DriverManager.getDriver().getTitle());
-        ExtentReportManager.addScreenShot(Status.PASS,"Google Test");
+    @Test(description = "Verify yahoo page title",retryAnalyzer = TestListener.class)
+    public void yahooTest(){
+        WebDriverActions.loadURL("https://www.yahoo.com/");
+        String title = WebDriverActions.getTitle();
+        Assert.assertEquals(title,"Yahoo");
     }
 }

@@ -1,0 +1,27 @@
+[INFO] 21-06-2023 18:37:35 [main] [Log4j] - Property file loaded
+[INFO] 21-06-2023 18:37:35 [main] [Log4j] - Launching brower CHROME
+[INFO] 21-06-2023 18:37:40 [main] [Log4j] - Google
+[INFO] 21-06-2023 18:37:40 [main] [Log4j] - Launching brower CHROME
+[INFO] 21-06-2023 18:37:43 [main] [Log4j] - Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos
+[INFO] 21-06-2023 18:37:44 [main] [Log4j] - Launching brower CHROME
+[INFO] 21-06-2023 18:37:50 [main] [Log4j] - Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos
+[INFO] 21-06-2023 18:39:45 [main] [Log4j] - Property file loaded
+[INFO] 21-06-2023 18:39:45 [main] [Log4j] - Launching brower CHROME
+[INFO] 21-06-2023 18:39:49 [main] [Log4j] - Google
+[INFO] 21-06-2023 18:39:49 [main] [CommonTest] - Google
+[INFO] 21-06-2023 18:39:49 [main] [Log4j] - Launching brower CHROME
+[INFO] 21-06-2023 18:39:57 [main] [Log4j] - Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos
+[INFO] 21-06-2023 18:39:57 [main] [CommonTest] - Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos
+[INFO] 21-06-2023 18:39:58 [main] [Log4j] - Launching brower CHROME
+[INFO] 21-06-2023 18:40:21 [main] [Log4j] - Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos
+[INFO] 21-06-2023 18:40:21 [main] [CommonTest] - Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos
+[INFO] 21-06-2023 19:25:28 [main] [Log] - Property file loaded
+[INFO] 21-06-2023 19:25:28 [main] [Log] - Launching brower CHROME
+[INFO] 21-06-2023 19:25:35 [main] [Log] - Load URL : https://www.google.com/
+[INFO] 21-06-2023 19:25:35 [main] [Log] - Get page title : Google
+[INFO] 21-06-2023 19:25:35 [main] [Log] - Launching brower CHROME
+[INFO] 21-06-2023 19:25:45 [main] [Log] - Load URL : https://www.yahoo.com/
+[INFO] 21-06-2023 19:25:45 [main] [Log] - Get page title : Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos
+[INFO] 21-06-2023 19:25:46 [main] [Log] - Launching brower CHROME
+[INFO] 21-06-2023 19:25:56 [main] [Log] - Load URL : https://www.yahoo.com/
+[INFO] 21-06-2023 19:25:56 [main] [Log] - Get page title : Yahoo | Mail, Weather, Search, Politics, News, Finance, Sports & Videos

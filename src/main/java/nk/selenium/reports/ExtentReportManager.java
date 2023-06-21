@@ -6,7 +6,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import nk.selenium.constants.ConstantsInFramework;
+import nk.selenium.constants.Constants;
 import nk.selenium.drivers.DriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -20,10 +20,10 @@ public class ExtentReportManager {
             ExtentSparkReporter spark = new ExtentSparkReporter("./ExtentReport/extent_report.html");
             extentReports.attachReporter(spark);
             spark.config().setTheme(Theme.STANDARD);
-            spark.config().setDocumentTitle(ConstantsInFramework.EXTENT_REPORT_TITLE);
-            spark.config().setReportName(ConstantsInFramework.EXTENT_REPORT_TITLE);
-            extentReports.setSystemInfo("Framework Name", ConstantsInFramework.EXTENT_REPORT_TITLE);
-            extentReports.setSystemInfo("Author", ConstantsInFramework.FRAMEWORK_AUTHOR);
+            spark.config().setDocumentTitle(Constants.EXTENT_REPORT_TITLE);
+            spark.config().setReportName(Constants.EXTENT_REPORT_TITLE);
+            extentReports.setSystemInfo("Framework Name", Constants.EXTENT_REPORT_TITLE);
+            extentReports.setSystemInfo("Author", Constants.FRAMEWORK_AUTHOR);
         }
     }
 
