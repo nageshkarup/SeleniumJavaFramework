@@ -8,6 +8,7 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import nk.selenium.constants.Constants;
 import nk.selenium.drivers.DriverManager;
+import nk.selenium.utils.WebDriverActions;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -68,6 +69,11 @@ public class ExtentReportManager {
     public static void addScreenShot(Status status, String message) {
         String base64Image = "data:image/png;base64," + ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
         getExtentTest().log(status,message, MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
+    }
+
+    synchronized public static void addBrowsers(){
+        if(getExtentTest() != null)
+            getExtentTest().assignDevice(WebDriverActions.getBrowserInformation());
     }
 
 }

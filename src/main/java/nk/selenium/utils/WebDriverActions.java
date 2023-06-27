@@ -2,13 +2,13 @@ package nk.selenium.utils;
 
 import com.aventstack.extentreports.Status;
 import static nk.selenium.constants.Constants.*;
+
+import io.qameta.allure.Step;
 import nk.selenium.drivers.DriverManager;
 import nk.selenium.reports.ExtentReportManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -35,6 +35,7 @@ public class WebDriverActions {
     }
 
 
+    @Step("Load URL: {0}")
     public static void loadURL(String url) {
         driver().get(url);
 
@@ -42,6 +43,7 @@ public class WebDriverActions {
         ExtentReportManager.logMessage(Status.PASS, "Load URL : "+url);
     }
 
+    @Step("Get Title")
     public static String getTitle() {
         String title = driver().getTitle();
         Log.info("Get page title : "+title);
@@ -49,18 +51,21 @@ public class WebDriverActions {
         return title;
     }
 
+    @Step("Click element: {0}")
     public static void click(By by){
         getElement(by).click();
         Log.info("Click Element "+by);
         ExtentReportManager.logMessage(Status.PASS,"Click Element "+by);
     }
 
+    @Step("Click element using JS: {0}")
     public static void clickJs(By by){
         getJsExecutor().executeScript("arguments[0].click();", getElement(by));
         Log.info("Click Element using JavascriptExecutor "+by);
         ExtentReportManager.logMessage(Status.PASS,"Click Element using JavascriptExecutor "+by);
     }
 
+    @Step("Click element using actions: {0}")
     public static void clickActions(By by){
         Actions action = new Actions(driver());
         action.moveToElement(getElement(by))
@@ -68,6 +73,56 @@ public class WebDriverActions {
         Log.info("Click Element using Actions "+by);
         ExtentReportManager.logMessage(Status.PASS,"Click Element using Actions "+by);
     }
+
+    @Step("Set text {1} on {0}")
+    public static void setText(By by, String text) {
+        waitForElementVisible(by);
+        getElement(by).sendKeys(text);
+        Log.info("Set text : '"+text+"' on element : "+by.toString());
+        ExtentReportManager.logMessage(Status.PASS, "Set text : '"+text+"' on element : "+by);
+    }
+
+    @Step("Set text {1} on {0}")
+    public static void setText(By by, String text, Keys keys) {
+        waitForElementVisible(by);
+        getElement(by).sendKeys(text,keys);
+        Log.info("Set text : '"+text+"' on element : "+by.toString());
+        ExtentReportManager.logMessage(Status.PASS, "Set text : '"+text+"' on element : "+by);
+    }
+
+    @Step("Set text {1} on {0}")
+    public static void clearAndSetText(By by, String text) {
+        waitForElementVisible(by);
+        clearText(by);
+        getElement(by).sendKeys(text);
+        Log.info("Set text : '"+text+"' on element : "+by.toString());
+        ExtentReportManager.logMessage(Status.PASS, "Set text : '"+text+"' on element : "+by);
+    }
+
+    @Step("Clear text element {0}")
+    public static void clearText(By by) {
+        waitForElementVisible(by);
+        getElement(by).clear();
+        Log.info("Clear text on element : "+by.toString());
+        ExtentReportManager.logMessage(Status.PASS, "Clear text on element : "+by);
+    }
+
+    @Step("Press enter on element {0}")
+    public static void pressEnter(By by) {
+        new Actions(driver()).moveToElement(getElement(by)).sendKeys(Keys.ENTER).build().perform();
+    }
+
+
+    public static String getBrowserInformation() {
+        try {
+            Capabilities capability = ((RemoteWebDriver) driver()).getCapabilities();
+            return capability.getBrowserName().toUpperCase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public static void sleep(double seconds) {
         try {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name ="Demo Tests" verbose="1"  >
+
+	<listeners>
+		<listener class-name="nk.selenium.listeners.TestListener"></listener>
+	</listeners>
+
+	<test name = "Test One">
+		<classes>
+			<class name = "nk.selenium.testcases.CommonTest">
+				<methods>
+					<parameter name="browser" value="CHROME"/>
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+<!--	<test name = "Test Two">-->
+<!--		<classes>-->
+<!--			<class name = "nk.selenium.testcases.CommonTest">-->
+<!--				<methods>-->
+<!--					<parameter name="browser" value="FIREFOX"/>-->
+<!--				</methods>-->
+<!--			</class>-->
+<!--		</classes>-->
+<!--	</test>-->
+
+</suite>

@@ -1,5 +1,6 @@
 package nk.selenium.base;
 
+import io.qameta.allure.Step;
 import nk.selenium.drivers.DriverManager;
 import nk.selenium.enums.BrowserType;
 import nk.selenium.listeners.TestListener;
@@ -9,24 +10,15 @@ import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
-@Listeners(TestListener.class)
+//@Listeners(TestListener.class)
 public class BaseTest {
 
-    @BeforeSuite
-    public void setUp(){
-        ExtentReportManager.createReport();
-    }
 
-    @AfterSuite
-    public void finish(){
-        ExtentReportManager.flushReport();
-    }
 
     @BeforeMethod
     @Parameters({"browser"})
     public void createDriverInstance(@Optional("CHROME") String browser){
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        Log.info("Launching brower "+browser);
         WebDriver driver = setUp(BrowserType.valueOf(browser));
         DriverManager.setDriver(driver);
     }
@@ -36,20 +28,21 @@ public class BaseTest {
         DriverManager.quitDriver();
     }
 
+    @Step("Create browser {0} instance")
     public WebDriver setUp(BrowserType browserName) {
         WebDriver driver;
         switch (browserName){
             case CHROME:
-                driver = BrowserType.CHROME.createDriverInstance();
+                driver = browserName.CHROME.createDriverInstance();
                 break;
             case FIREFOX:
-                driver = BrowserType.FIREFOX.createDriverInstance();
+                driver = browserName.FIREFOX.createDriverInstance();
                 break;
             case EDGE:
-                driver = BrowserType.EDGE.createDriverInstance();
+                driver = browserName.EDGE.createDriverInstance();
                 break;
             case SAFARI:
-                driver = BrowserType.SAFARI.createDriverInstance();
+                driver = browserName.SAFARI.createDriverInstance();
                 break;
             default:
                 throw new InvalidArgumentException(browserName.toString());

@@ -3,6 +3,7 @@ package nk.selenium.listeners;
 import static nk.selenium.constants.Constants.*;
 
 import com.aventstack.extentreports.Status;
+import nk.selenium.reports.AllureManager;
 import nk.selenium.reports.ExtentReportManager;
 import nk.selenium.utils.Log;
 import nk.selenium.utils.PropertyFile;
@@ -18,6 +19,7 @@ public class TestListener implements ITestListener, IRetryAnalyzer {
         // load all the values in the property file
         PropertyFile.load();
         Log.info("Property file loaded");
+        ExtentReportManager.createReport();
     }
 
     @Override
@@ -28,6 +30,7 @@ public class TestListener implements ITestListener, IRetryAnalyzer {
     @Override
     public void onTestStart(ITestResult result) {
         ExtentReportManager.createTestCase(result.getName(),result.getMethod().getDescription());
+        ExtentReportManager.addBrowsers();
     }
 
     @Override
@@ -36,22 +39,27 @@ public class TestListener implements ITestListener, IRetryAnalyzer {
             ExtentReportManager.addScreenShot(Status.PASS,"Test case is passed");
         }
         ExtentReportManager.logMessage(Status.PASS,"Test case is passed");
+        AllureManager.textLog("Test case is passed");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
+        ExtentReportManager.logMessage(Status.FAIL,"Test case is failed");
+        AllureManager.textLog("Test case is failed");
         if(TAKE_SCREENSHOT_FAIL){
             ExtentReportManager.addScreenShot(Status.FAIL,"Test case is failed");
+            AllureManager.addScreenShot("Screenshot taken for failed test case "+result.getName());
         }
-        ExtentReportManager.logMessage(Status.FAIL,"Test case is failed");
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
+        ExtentReportManager.logMessage(Status.SKIP,"Test case is skipped");
+        AllureManager.textLog("Test case is skipped");
         if(TAKE_SCREENSHOT_FAIL){
             ExtentReportManager.addScreenShot(Status.SKIP,"Test case is skipped");
+            AllureManager.addScreenShot("Screenshot taken for skipped test case "+result.getName());
         }
-        ExtentReportManager.logMessage(Status.SKIP,"Test case is skipped");
     }
 
 
