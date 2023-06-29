@@ -2,10 +2,7 @@ package nk.selenium.testcases;
 
 import io.qameta.allure.*;
 import nk.selenium.base.BaseTest;
-import nk.selenium.drivers.DriverManager;
 import nk.selenium.listeners.TestListener;
-import nk.selenium.reports.ExtentReportManager;
-import nk.selenium.utils.Log;
 import nk.selenium.utils.WebDriverActions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,7 +22,7 @@ public class CommonTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     public void googleTest(){
         WebDriverActions.loadURL("https://www.google.com/");
-        WebDriverActions.setText(By.name("q"),"Selenium", Keys.ENTER);
+        WebDriverActions.type(By.name("q"),"Selenium", Keys.ENTER);
         String title = WebDriverActions.getTitle();
         Assert.assertEquals(title,"Selenium - Google Search");
     }
