@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -140,6 +142,19 @@ public class WebDriverActions {
         ExtentReportManager.logMessage(Status.PASS, "Clear text on element : "+by);
     }
 
+    @Step("Clear text element {0}")
+    public static void clearTextAction(By by) {
+        waitForElementVisible(by);
+        Actions action = new Actions(driver());
+        action.moveToElement(getElement(by))
+                .click()
+                .keyDown(Keys.CONTROL).sendKeys("a")
+                .keyUp(Keys.CONTROL).sendKeys(Keys.BACK_SPACE)
+                .build().perform();
+        Log.info("Clear text on element : "+by.toString());
+        ExtentReportManager.logMessage(Status.PASS, "Clear text on element : "+by.toString());
+    }
+
 
 
     public static String getBrowserInformation() {
@@ -248,7 +263,6 @@ public class WebDriverActions {
         }
     }
 
-
     @Step("Check element is checked {0}")
     public static boolean isElementChecked(By by) {
         waitForElementVisible(by);
@@ -308,11 +322,17 @@ public class WebDriverActions {
     }
 
 
-
     @Step("Scroll to element {0}")
     public static void scrollToElement(By by) {
         waitForElementPresent(by);
         getJsExecutor().executeScript("arguments[0].scrollIntoView(true);", getElement(by));
+        Log.info("Scroll to element : "+by);
+    }
+
+    @Step("Scroll to element {0}")
+    public static void scrollTillElement(By by) {
+        waitForElementPresent(by);
+        getJsExecutor().executeScript("arguments[0].scrollIntoView(false);", getElement(by));
         Log.info("Scroll to element : "+by);
     }
 
@@ -336,8 +356,37 @@ public class WebDriverActions {
         sleep(0.5);
     }
 
-    //Handle Dropdowns
+    @Step("Hover on element")
+    public static boolean hoverOnElement(By by){
+        try{
+            new Actions(driver())
+                    .moveToElement(getElement(by))
+                    .perform();
+            Log.info("hover on element");
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
+    @Step("Drag from element {0} to element {1}")
+    public static boolean dragAndDropElement(By from, By to){
+        try{
+            new Actions(driver())
+                    .dragAndDrop(getElement(from),getElement(to))
+                    .build()
+                    .perform();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+
+
+    /**
+     *Handle Dropdowns
+     * **/
     @Step("Select dropdown element {0} using text {1}")
     public static void selectDropdownByText(By by, String text) {
         waitForElementVisible(by);
@@ -436,7 +485,9 @@ public class WebDriverActions {
         new Actions(driver()).moveToElement(body).click().perform();
     }
 
-    //Handle Windows
+    /**
+     * Handle Windows
+     * */
     public static void openNewTab() {
         driver().switchTo().newWindow(WindowType.TAB);
         Log.info("Open and Switch to new Tab");
@@ -483,7 +534,9 @@ public class WebDriverActions {
         }
     }
 
-    //Handle iFrames
+    /***
+     * Handle iFrames
+     * */
     @Step("Switch to frame on element {0}")
     public static void switchToFrame(By by) {
         waitForFrameAvailableSwitchToIt(by);
@@ -581,7 +634,9 @@ public class WebDriverActions {
         }
     }
 
-    //Handle Alerts
+    /***
+     *Handle Alerts
+     **/
 
     public static void alertAccept() {
         waitForAlertPresent();
@@ -693,6 +748,26 @@ public class WebDriverActions {
         }catch(Throwable error) {
             Log.error("Timeout waiting for the title changes. "+url);
             Assert.fail("Timeout waiting for the title changes . " + url);
+        }
+    }
+
+    public static void waitForElementClickable(WebElement element) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver(), Duration.ofSeconds(WAIT_MEDIUM), Duration.ofMillis(500));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+        }catch(Throwable error) {
+            Log.error("Timeout waiting for the element to be clickable. "+element.toString());
+            Assert.fail("Timeout waiting for the element to be clickable. " + element);
+        }
+    }
+
+    public static void waitForElementClickable(By by, int seconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver(), Duration.ofSeconds(seconds), Duration.ofMillis(500));
+            wait.until(ExpectedConditions.elementToBeClickable(by));
+        }catch(Throwable error) {
+            Log.error("Timeout waiting for the element to be clickable. "+by);
+            Assert.fail("Timeout waiting for the element to be clickable. " + by);
         }
     }
 

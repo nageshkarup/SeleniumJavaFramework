@@ -5,6 +5,7 @@ import static nk.selenium.constants.Constants.*;
 import com.aventstack.extentreports.Status;
 import nk.selenium.reports.AllureManager;
 import nk.selenium.reports.ExtentReportManager;
+import nk.selenium.utils.AssertionUtils;
 import nk.selenium.utils.Log;
 import nk.selenium.utils.PropertyFile;
 import org.testng.IRetryAnalyzer;
@@ -25,6 +26,7 @@ public class TestListener implements ITestListener, IRetryAnalyzer {
     @Override
     public void onFinish(ITestContext context) {
         ExtentReportManager.flushReport();
+        AssertionUtils.softAssertAll();;
     }
 
     @Override
