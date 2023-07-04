@@ -15,5 +15,7 @@ public class Constants {
     public static final Boolean TAKE_SCREENSHOT_FAIL = Boolean.parseBoolean(PropertyFile.getValue("TAKE_SCREENSHOT_FAIL"));
     public static final Boolean TAKE_SCREENSHOT_PASS = Boolean.parseBoolean(PropertyFile.getValue("TAKE_SCREENSHOT_PASS"));
 
+    public static final String EXCEL_FILE_PATH  = System.getProperty("user.dir")+"/src/test/resources/testdata/test_data.xlsx";
+
 
 }

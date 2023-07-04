@@ -10,12 +10,12 @@ import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
-//@Listeners(TestListener.class)
+@Listeners(TestListener.class)
 public class BaseTest {
 
 
 
-    @BeforeMethod
+    @BeforeTest
     @Parameters({"browser"})
     public void createDriverInstance(@Optional("CHROME") String browser){
         System.setProperty("webdriver.http.factory", "jdk-http-client");
@@ -23,7 +23,7 @@ public class BaseTest {
         DriverManager.setDriver(driver);
     }
 
-    @AfterMethod
+    @AfterTest
     public void quitDriverInstance(){
         DriverManager.quitDriver();
     }

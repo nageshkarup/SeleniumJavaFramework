@@ -8,11 +8,9 @@
 	</listeners>
 
 	<test name = "Test One">
+		<parameter name="browser" value="CHROME"/>
 		<classes>
 			<class name = "nk.selenium.testcases.CommonTest">
-				<methods>
-					<parameter name="browser" value="CHROME"/>
-				</methods>
 			</class>
 		</classes>
 	</test>

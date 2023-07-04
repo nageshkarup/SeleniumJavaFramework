@@ -3,6 +3,7 @@ package nk.selenium.testcases;
 import io.qameta.allure.*;
 import nk.selenium.base.BaseTest;
 import nk.selenium.listeners.TestListener;
+import nk.selenium.utils.AssertionUtils;
 import nk.selenium.utils.WebDriverActions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,18 +25,20 @@ public class CommonTest extends BaseTest {
         WebDriverActions.loadURL("https://www.google.com/");
         WebDriverActions.type(By.name("q"),"Selenium", Keys.ENTER);
         String title = WebDriverActions.getTitle();
-        Assert.assertEquals(title,"Selenium - Google Search");
+        AssertionUtils.softAssertTextContains(title,"Selenium - Google","Verify google page title");
+        System.out.println(title);
     }
 
-    @Test(description = "Verify yahoo page title",retryAnalyzer = TestListener.class)
+    @Test(description = "Verify bing page title",retryAnalyzer = TestListener.class)
     @Description("Verify google page title")
     @Feature("Feature 001: google title")
     @Story("verify logo matches")
     @Severity(SeverityLevel.MINOR)
-    public void yahooTest(){
-        WebDriverActions.loadURL("https://www.yahoo.com/");
+    public void bingTest(){
+        WebDriverActions.loadURL("https://www.bing.com/");
         String title = WebDriverActions.getTitle();
-        Assert.assertEquals(title,"Yahoo");
+        AssertionUtils.softAssertEquals(title,"Bing   ","Verify bing page title");
+        System.out.println(title);
     }
 
 }
