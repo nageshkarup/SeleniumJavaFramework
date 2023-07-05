@@ -6,15 +6,21 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import nk.selenium.constants.Constants;
 import nk.selenium.drivers.DriverManager;
+import nk.selenium.utils.Log;
 import nk.selenium.utils.WebDriverActions;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-public class ExtentReportManager {
+import java.io.ByteArrayInputStream;
+
+public class ReportManager {
 
     private static ExtentReports extentReports;
+
     public static void createReport(){
         if(extentReports == null){
             extentReports = new ExtentReports();
@@ -56,19 +62,29 @@ public class ExtentReportManager {
         setExtentTest(extentReports.createTest(testCaseName,description));
     }
 
+    @Step(value = "{0}")
     public static void logMessage(String message){
         if(getExtentTest() != null)
             getExtentTest().info(message);
+        Log.info(message);
     }
 
+    @Step(value = "{1}")
     public static void logMessage(Status status,String message){
         if(getExtentTest() != null)
             getExtentTest().log(status,message);
+        Log.info(message);
     }
 
+    @Step(value = "{0}: {1}")
     public static void addScreenShot(Status status, String message) {
+        //For allure report
+        byte[] screenshotBytes = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+        Allure.addAttachment(message, new ByteArrayInputStream(screenshotBytes));
+        //For extent report
         String base64Image = "data:image/png;base64," + ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
         getExtentTest().log(status,message, MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
+        Log.info(message);
     }
 
     synchronized public static void addBrowsers(){

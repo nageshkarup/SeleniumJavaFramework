@@ -3,8 +3,6 @@ package nk.selenium.testcases;
 import nk.selenium.base.BaseTest;
 import nk.selenium.dataprovider.DataProviders;
 import nk.selenium.pages.ProductPage;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

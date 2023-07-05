@@ -1,11 +1,9 @@
 package nk.selenium.pages;
 
-import nk.selenium.drivers.DriverManager;
 import nk.selenium.utils.WebDriverActions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 import java.util.Map;
+
 
 public class ProductPage {
 
