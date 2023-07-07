@@ -10,7 +10,7 @@
 	<test name = "Sample Test">
 		<parameter name="browser" value="CHROME"/>
 		<classes>
-			<class name = "nk.selenium.testcases.CommonTest">
+			<class name = "nk.selenium.testcases.AddProductToCartTest">
 			</class>
 		</classes>
 	</test>

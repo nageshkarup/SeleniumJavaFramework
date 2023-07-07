@@ -3,16 +3,17 @@ package nk.selenium.utils;
 import java.io.FileInputStream;
 import java.util.Properties;
 
+import static nk.selenium.constants.Constants.CONFIG_FILE_PATH;
+
 public class PropertyFile {
 
-    private static String path = "/src/main/resources/config.properties";
     private static Properties properties;
     private static FileInputStream input;
 
 	public static Properties load() {
 		properties = new Properties();
 		try {
-			input = new FileInputStream(System.getProperty("user.dir") + path);
+			input = new FileInputStream(CONFIG_FILE_PATH);
 			properties.load(input);
 			input.close();
 		} catch (Exception e) {
@@ -26,7 +27,7 @@ public class PropertyFile {
 		try {
 			if(input == null) {
 				properties = new Properties();
-				input = new FileInputStream(System.getProperty("user.dir") + path);
+				input = new FileInputStream(CONFIG_FILE_PATH);
 				properties.load(input);
 				input.close();
 			}

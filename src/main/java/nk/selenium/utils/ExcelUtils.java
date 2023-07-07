@@ -1,6 +1,7 @@
 package nk.selenium.utils;
 
 
+import nk.selenium.constants.Constants;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -71,10 +72,9 @@ public class ExcelUtils {
         return format.formatCellValue(cell);
     }
 
-    public static void main(String[] args) {
-        Object[][] data = getDataHashMap(System.getProperty("user.dir")+"/src/test/resources/testdata/test_data.xlsx", "Products");
-        Arrays.stream(data).flatMap(Arrays::stream).forEach(System.out::println);
-    }
-
+//    public static void main(String[] args) {
+//        Object[][] data = getDataHashMap(System.getProperty("user.dir")+"/src/test/resources/testdata/test_data.xlsx", "Products");
+//        Arrays.stream(data).flatMap(Arrays::stream).forEach(System.out::println);
+//    }
 
 }
