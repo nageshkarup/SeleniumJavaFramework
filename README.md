@@ -7,7 +7,7 @@ This is a Selenium framework that provides a set of utility functions and suppor
 
 1. Clone the repository:
 
-`run git clone git@github.com:nageshkarup/SeleniumJavaFramework.git`
+run `git clone git@github.com:nageshkarup/SeleniumJavaFramework.git`
 
 2. Install the desired IDE. eg. Eclipse or IntelliJ
 
@@ -24,6 +24,7 @@ The framework includes utility functions for common tasks such as:
 - Logging and reporting.
 - Custom listener implementation
 - Assertion utils
+  
 ## Data Provider
 
 The framework supports data-driven testing using TestNG's `@DataProvider` annotation. You can define test data in Excel files and easily retrieve it using the `ExcelUtils` utility class.
@@ -43,15 +44,13 @@ The framework provides two reporting options: Extent Report and Allure Report.
 ## WebDriver Actions
 
 The framework includes a set of keywords for common WebDriver actions, such as:
-- Opening a URL.
-- Navigating forward/backward.
-- Locating elements by various strategies (XPath, CSS selector, etc.).
 - Interacting with input fields, buttons, dropdowns, checkboxes, and radio buttons.
 - Handling alerts, frames, and windows.
 - Performing mouse actions (click, hover, drag and drop, etc.).
 - Executing JavaScript code.
 - Explicit wait
 - Handling dynamic loaded elements
+- Locating elements by various strategies (XPath, CSS selector, etc.).
 
 Refer to the documentation or the code itself for more information on the available keywords and their usage.
 
