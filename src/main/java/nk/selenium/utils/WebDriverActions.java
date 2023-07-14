@@ -250,8 +250,8 @@ public class WebDriverActions {
                 break;
             } catch (Throwable e) {
                 wait--;
-                ReportManager.logMessage("Unable to interact with element : " + by + " because of " + e.getClass().getSimpleName() + ". So Retrying...");
-                sleep(1);
+                Log.info("Unable to interact with element : " + by + " because of " + e.getClass().getSimpleName() + ". So Retrying...");
+                sleep(1.5);
             }
         }
         if(!flag){
@@ -283,31 +283,31 @@ public class WebDriverActions {
     }
 
 
-    public static void scrollToElement(By by) {
+    public static void scrollToTop(By by) {
         waitForElementPresent(by);
         getJsExecutor().executeScript("arguments[0].scrollIntoView(true);", getElement(by));
         ReportManager.logMessage("Scroll to element : "+by);
     }
 
-    public static void scrollTillElement(By by) {
+    public static void scrollToBottom(By by) {
         waitForElementPresent(by);
         getJsExecutor().executeScript("arguments[0].scrollIntoView(false);", getElement(by));
         ReportManager.logMessage("Scroll till element : "+by);
     }
 
-    public static void scrollToElement(WebElement element) {
+    public static void scrollToTop(WebElement element) {
         getJsExecutor().executeScript("arguments[0].scrollIntoView(true);", element);
         ReportManager.logMessage("Scroll to element : "+element.toString());
     }
 
     public static void highlightElement(By by) {
-        scrollToElement(by);
+        scrollToTop(by);
         getJsExecutor().executeScript("arguments[0].style.border='3px solid red'", getElement(by));
         sleep(0.5);
     }
 
     public static void highlightElement(WebElement element) {
-        scrollToElement(element);
+        WebDriverActions.scrollToTop(element);
         getJsExecutor().executeScript("arguments[0].style.border='3px solid red'", element);
         sleep(0.5);
     }

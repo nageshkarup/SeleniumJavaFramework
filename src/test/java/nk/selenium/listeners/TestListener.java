@@ -6,18 +6,18 @@ import com.aventstack.extentreports.Status;
 import nk.selenium.reports.ReportManager;
 import nk.selenium.utils.AssertionUtils;
 import nk.selenium.utils.Log;
-import nk.selenium.utils.PropertyFile;
+import nk.selenium.utils.PropertyFileUtils;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-public class TestListener implements ITestListener, IRetryAnalyzer {
+public class TestListener implements ITestListener, IRetryAnalyzer{
 
     @Override
     public void onStart(ITestContext context) {
         // load all the values in the property file
-        PropertyFile.load();
+        PropertyFileUtils.load();
         Log.info("Property file loaded");
         ReportManager.createReport();
     }

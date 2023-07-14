@@ -24,7 +24,7 @@ public class ReportManager {
     public static void createReport(){
         if(extentReports == null){
             extentReports = new ExtentReports();
-            ExtentSparkReporter spark = new ExtentSparkReporter("./ExtentReport/extent_report.html");
+            ExtentSparkReporter spark = new ExtentSparkReporter(Constants.EXTENT_REPORT_PATH);
             extentReports.attachReporter(spark);
             spark.config().setTheme(Theme.STANDARD);
             spark.config().setDocumentTitle(Constants.EXTENT_REPORT_TITLE);

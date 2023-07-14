@@ -21,7 +21,7 @@ public class ProductPage {
 
     public void addProductTCart(String id, String qty){
         String imagePath = "(//a[contains(@href,'product_id="+id+"')])[1]";
-        WebDriverActions.scrollToElement(By.xpath(imagePath));
+        WebDriverActions.scrollToTop(By.xpath(imagePath));
         WebDriverActions.hoverOnElement(By.xpath(imagePath));
         String viewProduct = "(//a[contains(@href,'product_id="+id+"')])[1]/../following-sibling::div/button[@title='Quick view']";
         WebDriverActions.clickJs(By.xpath(viewProduct));
@@ -34,7 +34,7 @@ public class ProductPage {
 
     public void addProductTCart(Map<String,String> data){
         String imagePath = "(//a[contains(@href,'product_id="+data.get("ID")+"')])[1]";
-        WebDriverActions.scrollToElement(By.xpath(imagePath));
+        WebDriverActions.scrollToTop(By.xpath(imagePath));
         WebDriverActions.hoverOnElement(By.xpath(imagePath));
         String viewProduct = "(//a[contains(@href,'product_id="+data.get("ID")+"')])[1]/../following-sibling::div/button[@title='Quick view']";
         WebDriverActions.clickJs(By.xpath(viewProduct));

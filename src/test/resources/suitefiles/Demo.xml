@@ -15,14 +15,14 @@
 		</classes>
 	</test>
 
-<!--	<test name = "Test Two">-->
-<!--		<classes>-->
-<!--			<class name = "nk.selenium.testcases.CommonTest">-->
-<!--				<methods>-->
-<!--					<parameter name="browser" value="FIREFOX"/>-->
-<!--				</methods>-->
-<!--			</class>-->
-<!--		</classes>-->
-<!--	</test>-->
+	<test name = "Test Two">
+		<classes>
+			<class name = "nk.selenium.testcases.CommonTest">
+				<methods>
+					<parameter name="browser" value="FIREFOX"/>
+				</methods>
+			</class>
+		</classes>
+	</test>
 
 </suite>

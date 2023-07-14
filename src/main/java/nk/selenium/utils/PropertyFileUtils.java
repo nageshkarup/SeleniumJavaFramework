@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import static nk.selenium.constants.Constants.CONFIG_FILE_PATH;
 
-public class PropertyFile {
+public class PropertyFileUtils {
 
     private static Properties properties;
     private static FileInputStream input;
