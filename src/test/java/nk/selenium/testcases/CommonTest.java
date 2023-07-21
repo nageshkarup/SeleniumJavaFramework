@@ -1,8 +1,10 @@
 package nk.selenium.testcases;
 
+import com.aventstack.extentreports.Status;
 import io.qameta.allure.*;
 import nk.selenium.base.BaseTest;
 import nk.selenium.listeners.TestListener;
+import nk.selenium.reports.ReportManager;
 import nk.selenium.utils.AssertionUtils;
 import nk.selenium.utils.WebDriverActions;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +24,7 @@ public class CommonTest extends BaseTest {
     @Severity(SeverityLevel.MINOR)
     public void googleTest(){
         WebDriverActions.loadURL("https://www.google.com/");
+        ReportManager.addElementScreenShot(By.cssSelector("img[alt='Google']"), Status.PASS,"Google logo");
         WebDriverActions.type(By.name("q"),"Selenium", Keys.ENTER);
         String title = WebDriverActions.getTitle();
         AssertionUtils.assertEquals(title,"Selenium - Google","Verify google page title");

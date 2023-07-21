@@ -1,7 +1,11 @@
 package nk.selenium.utils;
 
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import static nk.selenium.constants.Constants.*;
+
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import nk.selenium.drivers.DriverManager;
 import nk.selenium.reports.ReportManager;
 import org.openqa.selenium.*;
@@ -12,8 +16,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -127,8 +134,6 @@ public class WebDriverActions {
                 .build().perform();
         ReportManager.logMessage(Status.PASS, "Clear text on element : "+by.toString());
     }
-
-
 
     public static String getBrowserInformation() {
         try {
@@ -307,7 +312,7 @@ public class WebDriverActions {
     }
 
     public static void highlightElement(WebElement element) {
-        WebDriverActions.scrollToTop(element);
+        scrollToTop(element);
         getJsExecutor().executeScript("arguments[0].style.border='3px solid red'", element);
         sleep(0.5);
     }
@@ -318,6 +323,30 @@ public class WebDriverActions {
                     .moveToElement(getElement(by))
                     .perform();
             ReportManager.logMessage("hover on element"+by);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public static boolean doubleClick(By by){
+        try{
+            new Actions(driver())
+                    .doubleClick(getElement(by))
+                    .perform();
+            ReportManager.logMessage("Double click on element"+by);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public static boolean rightClick(By by){
+        try{
+            new Actions(driver())
+                    .contextClick(getElement(by))
+                    .perform();
+            ReportManager.logMessage("Right click on element"+by);
             return true;
         }catch (Exception e){
             return false;

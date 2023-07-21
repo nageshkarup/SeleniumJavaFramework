@@ -20,6 +20,11 @@ public class Constants {
     public static final Boolean TAKE_SCREENSHOT_PASS = Boolean.parseBoolean(PropertyFileUtils.getValue("TAKE_SCREENSHOT_PASS"));
 
     public static final String EXCEL_FILE_PATH  = CURRENT_DIR+ PropertyFileUtils.getValue("EXCEL_FILE_PATH");
+    public static final String DB_HOST  = PropertyFileUtils.getValue("DB_HOST");
+    public static final String DB_NAME  = PropertyFileUtils.getValue("DB_NAME");
+    public static final String DB_USERNAME  = PropertyFileUtils.getValue("DB_USERNAME");
+    public static final String DB_PASSWORD  = PropertyFileUtils.getValue("DB_PASSWORD");
+
 
 
 }

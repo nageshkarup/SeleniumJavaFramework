@@ -12,10 +12,12 @@ import nk.selenium.constants.Constants;
 import nk.selenium.drivers.DriverManager;
 import nk.selenium.utils.Log;
 import nk.selenium.utils.WebDriverActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
 import java.io.ByteArrayInputStream;
+import java.util.Base64;
 
 public class ReportManager {
 
@@ -76,7 +78,7 @@ public class ReportManager {
         Log.info(message);
     }
 
-    @Step(value = "{0}: {1}")
+    @Step(value = "Add Screenshot: {0}: {1}")
     public static void addScreenShot(Status status, String message) {
         //For allure report
         byte[] screenshotBytes = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
@@ -84,6 +86,18 @@ public class ReportManager {
         //For extent report
         String base64Image = "data:image/png;base64," + ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
         getExtentTest().log(status,message, MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
+        Log.info(message);
+    }
+
+    @Step(value = "Add Screenshot of element: {0}")
+    public static void addElementScreenShot(By by, Status status, String message) {
+        WebDriverActions.waitForElementVisible(by);
+        //For allure report
+        byte[] bytes = WebDriverActions.getElement(by).getScreenshotAs(OutputType.BYTES);
+        Allure.addAttachment("Screenshot of element "+by, new ByteArrayInputStream(bytes));
+        //For extent report
+        String screenshotBase64 = Base64.getEncoder().encodeToString(bytes);
+        getExtentTest().log(status,message, MediaEntityBuilder.createScreenCaptureFromBase64String(screenshotBase64).build());
         Log.info(message);
     }
 

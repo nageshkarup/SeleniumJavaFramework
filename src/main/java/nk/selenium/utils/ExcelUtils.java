@@ -1,7 +1,6 @@
 package nk.selenium.utils;
 
 
-import nk.selenium.constants.Constants;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -10,7 +9,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,10 +69,4 @@ public class ExcelUtils {
         DataFormatter format = new DataFormatter();
         return format.formatCellValue(cell);
     }
-
-//    public static void main(String[] args) {
-//        Object[][] data = getDataHashMap(System.getProperty("user.dir")+"/src/test/resources/testdata/test_data.xlsx", "Products");
-//        Arrays.stream(data).flatMap(Arrays::stream).forEach(System.out::println);
-//    }
-
 }

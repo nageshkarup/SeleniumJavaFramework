@@ -21,6 +21,7 @@
         <log4j.version>2.19.0</log4j.version>
         <allure.version>2.22.2</allure.version>
         <apache-poi.version>5.2.2</apache-poi.version>
+        <mysql-connector.version>8.0.29</mysql-connector.version>
         <aspectj.version>1.9.19</aspectj.version>
         <maven-surefire-plugin>3.1.2</maven-surefire-plugin>
     </properties>
@@ -66,6 +67,11 @@
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>${apache-poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector.version}</version>
         </dependency>
 
     </dependencies>
