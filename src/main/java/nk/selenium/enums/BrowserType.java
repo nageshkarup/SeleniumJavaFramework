@@ -36,7 +36,6 @@ public enum BrowserType {
         @Override
         public WebDriver createDriverInstance() {
             System.out.println("Launching FireFox Browser...");
-            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
             FirefoxOptions options = new FirefoxOptions();
             if(HEADLESS)
                 options.addArguments("--headless");

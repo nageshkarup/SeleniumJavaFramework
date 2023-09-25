@@ -6,9 +6,9 @@ import java.sql.*;
 
 public class DatabaseConnection {
 
-    private static final String DB_URL = "jdbc:mysql://" + Constants.DB_HOST + ":3306/" + Constants.DB_NAME;
-    private static final String USER = Constants.DB_USERNAME;
-    private static final String PASSWORD =Constants.DB_PASSWORD;
+    private static final String DB_URL = "jdbc:mysql://" + PropertyFileUtils.getValue("DB_HOST") + ":3306/" + PropertyFileUtils.getValue("DB_NAME");
+    private static final String USER = PropertyFileUtils.getValue("DB_USERNAME");
+    private static final String PASSWORD =PropertyFileUtils.getValue("DB_PASSWORD");
     private static Connection connection;
 
     private DatabaseConnection(){

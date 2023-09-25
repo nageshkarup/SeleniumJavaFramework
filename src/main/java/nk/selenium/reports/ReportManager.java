@@ -43,7 +43,7 @@ public class ReportManager {
     }
 
     //Maintaining ExtentTest in the ThreadLocal class to avoid concurrency issues.
-    private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+    private static final ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
     private static void setExtentTest(ExtentTest test){
         extentTest.set(test);
@@ -85,7 +85,8 @@ public class ReportManager {
         Allure.addAttachment(message, new ByteArrayInputStream(screenshotBytes));
         //For extent report
         String base64Image = "data:image/png;base64," + ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BASE64);
-        getExtentTest().log(status,message, MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
+        if(getExtentTest() != null)
+            getExtentTest().log(status,message, MediaEntityBuilder.createScreenCaptureFromBase64String(base64Image).build());
         Log.info(message);
     }
 

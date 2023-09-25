@@ -7,41 +7,43 @@ import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
+import static nk.selenium.enums.BrowserType.*;
+
 public class BaseTest {
 
 
 
-    @BeforeTest
+    @BeforeMethod
     @Parameters({"browser"})
     public void createDriverInstance(@Optional("CHROME") String browser){
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        WebDriver driver = setUp(BrowserType.valueOf(browser));
+        WebDriver driver = setUp(browser);
         DriverManager.setDriver(driver);
     }
 
-    @AfterTest
+    @AfterMethod
     public void quitDriverInstance(){
         DriverManager.quitDriver();
     }
 
     @Step("Create browser {0} instance")
-    public WebDriver setUp(BrowserType browserName) {
+    public WebDriver setUp(String browserName) {
         WebDriver driver;
-        switch (browserName){
+        switch (BrowserType.valueOf(browserName)){
             case CHROME:
-                driver = browserName.CHROME.createDriverInstance();
+                driver = CHROME.createDriverInstance();
                 break;
             case FIREFOX:
-                driver = browserName.FIREFOX.createDriverInstance();
+                driver = FIREFOX.createDriverInstance();
                 break;
             case EDGE:
-                driver = browserName.EDGE.createDriverInstance();
+                driver = EDGE.createDriverInstance();
                 break;
             case SAFARI:
-                driver = browserName.SAFARI.createDriverInstance();
+                driver = SAFARI.createDriverInstance();
                 break;
             default:
-                throw new InvalidArgumentException(browserName.toString());
+                throw new InvalidArgumentException(browserName);
         }
         return driver;
     }

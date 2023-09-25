@@ -7,9 +7,9 @@
 		<listener class-name="nk.selenium.listeners.TestListener"/>
 	</listeners>
 
-	<test name = "Test Two">
+	<test name = "Test One">
 		<classes>
-			<class name = "nk.selenium.testcases.CommonTest">
+			<class name = "nk.selenium.testcases.AddProductToCartTest">
 				<methods>
 					<parameter name="browser" value="CHROME"/>
 				</methods>

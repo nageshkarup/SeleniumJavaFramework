@@ -31,7 +31,7 @@ public class TestListener implements ITestListener, IRetryAnalyzer{
     @Override
     public void onTestStart(ITestResult result) {
         ReportManager.createTestCase(result.getName(),result.getMethod().getDescription());
-        ReportManager.addBrowsers();
+        //ReportManager.addBrowsers();
     }
 
     @Override
@@ -61,11 +61,11 @@ public class TestListener implements ITestListener, IRetryAnalyzer{
 
     //RetryListener
     private int count = 1;
-    private int maximumTry = 2;
 
     @Override
     public boolean retry(ITestResult result) {
         if(!result.isSuccess()) {
+            int maximumTry = 2;
             if(count < maximumTry) {
                 Log.info("Test case is failed retrying.../n"+result.getThrowable().getMessage());
                 count++;

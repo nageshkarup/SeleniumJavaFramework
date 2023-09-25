@@ -1,11 +1,9 @@
 package nk.selenium.utils;
 
-import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import static nk.selenium.constants.Constants.*;
 
-import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
+
 import nk.selenium.drivers.DriverManager;
 import nk.selenium.reports.ReportManager;
 import org.openqa.selenium.*;
@@ -16,14 +14,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class WebDriverActions {
 
@@ -218,9 +214,12 @@ public class WebDriverActions {
 
     public static boolean isElementDisplayed(WebElement element) {
         try {
-            element.isDisplayed();
-            Log.info("Element is displayed "+element);
-            return true;
+            boolean status = element.isDisplayed();
+            if(status)
+                Log.info("Element is displayed "+element);
+            else
+                Log.info("Element is not displayed "+element);
+            return status;
         }catch(Exception e) {
             Log.info("Element is not displayed "+element);
             return false;
@@ -229,9 +228,12 @@ public class WebDriverActions {
 
     public static boolean isElementDisplayed(By by) {
         try {
-            getElement(by).isDisplayed();
-            Log.info("Element is displayed "+by);
-            return true;
+            boolean status = getElement(by).isDisplayed();
+            if(status)
+                Log.info("Element is displayed "+by);
+            else
+                Log.info("Element is not displayed "+by);
+            return status;
         }catch(Exception e) {
             Log.info("Element is not displayed "+by);
             return false;
@@ -244,7 +246,7 @@ public class WebDriverActions {
         return getElement(by).isSelected();
     }
 
-    public static void interactDynamicElements(By by, Consumer<WebDriver> action) {
+    public static void interactWithElement(By by, Consumer<WebDriver> action) {
         long wait = WAIT_LONG;
         boolean flag = false;
         while(wait > 0) {
@@ -253,16 +255,40 @@ public class WebDriverActions {
                 flag = true;
                 ReportManager.logMessage(Status.PASS, "Interacted with the Element : "+by);
                 break;
-            } catch (Throwable e) {
+            } catch (Exception e) {
                 wait--;
                 Log.info("Unable to interact with element : " + by + " because of " + e.getClass().getSimpleName() + ". So Retrying...");
-                sleep(1.5);
+                sleep(1);
             }
         }
         if(!flag){
             ReportManager.logMessage(Status.FAIL,"Timeout waiting for element to interact "+by);
             Assert.fail("Timeout waiting for element to interact "+by);
         }
+    }
+
+    public static <T> T interactWithElement(By by, Function<WebDriver,Object> condition) {
+        long wait = WAIT_LONG;
+        boolean flag = false;
+        T t = null;
+        while(wait > 0) {
+            try {
+                Object obj = condition.apply(driver());
+                t = (T) obj;
+                flag = true;
+                ReportManager.logMessage(Status.PASS, "Interacted with the Element : "+by);
+                break;
+            } catch (Exception e) {
+                wait--;
+                Log.info("Unable to interact with element : " + by + " because of " + e.getClass().getSimpleName() + ". So Retrying...");
+                sleep(1);
+            }
+        }
+        if(!flag){
+            ReportManager.logMessage(Status.FAIL,"Timeout waiting for element to interact "+by);
+            Assert.fail("Timeout waiting for element to interact "+by);
+        }
+        return t;
     }
 
     public static String getInputFieldText(By by) {

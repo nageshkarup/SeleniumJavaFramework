@@ -15,11 +15,11 @@ public class AddProductToCartTest extends BaseTest {
     @BeforeClass(alwaysRun = true)
     public void setUp(){
         productPage = new ProductPage();
-        productPage.load();
     }
 
     @Test(dataProvider = "getProductDataMap",dataProviderClass = DataProviders.class)
     public void addMultipleProductToCart(Map<String,String> products){
+        productPage.load();
         productPage.addProductTCart(products);
     }
 

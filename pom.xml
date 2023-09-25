@@ -15,13 +15,13 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <selenium.version>4.10.0</selenium.version>
-        <testng.version>7.7.1</testng.version>
-        <extentreport.version>5.0.9</extentreport.version>
+        <selenium.version>4.12.1</selenium.version>
+        <testng.version>7.8.0</testng.version>
+        <extentreport.version>5.1.1</extentreport.version>
         <log4j.version>2.19.0</log4j.version>
         <allure.version>2.22.2</allure.version>
         <apache-poi.version>5.2.2</apache-poi.version>
-        <mysql-connector.version>8.0.29</mysql-connector.version>
+        <mysql-connector.version>8.1.0</mysql-connector.version>
         <aspectj.version>1.9.19</aspectj.version>
         <maven-surefire-plugin>3.1.2</maven-surefire-plugin>
     </properties>
@@ -69,10 +69,11 @@
             <version>${apache-poi.version}</version>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
             <version>${mysql-connector.version}</version>
         </dependency>
+
 
     </dependencies>
 
@@ -88,8 +89,9 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${basedir}/src/test/resources/suitefiles/Demo.xml</suiteXmlFile>
+                        <suiteXmlFile>${xmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
                     <systemPropertyVariables>
                         <allure.results.directory>target/allure-results</allure.results.directory>
                     </systemPropertyVariables>
